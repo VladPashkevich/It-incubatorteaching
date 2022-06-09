@@ -75,7 +75,7 @@ app.put('/videos/:videoId', (req: Request, res: Response) => {
 });
 
 app.get('/videos/:videoId', (req: Request, res: Response) => {
-  const id = +req.params.videosId;
+  const id = +req.params.videoId;
   const video = videos.find((v) => v.id === id);
 
   if (video) {
