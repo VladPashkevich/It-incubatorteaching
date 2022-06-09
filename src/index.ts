@@ -35,7 +35,6 @@ app.post('/videos', (req: Request, res: Response) => {
           field: 'title',
         },
       ],
-      resultCode: 1,
     });
     return;
   }
