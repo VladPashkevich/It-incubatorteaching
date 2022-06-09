@@ -48,7 +48,7 @@ app.post('/videos', (req: Request, res: Response) => {
   res.status(201).send(newVideo);
 });
 
-app.put('/videos/:videosId', (req: Request, res: Response) => {
+app.put('/videos/:videoId', (req: Request, res: Response) => {
   let title = req.body.title;
   if (!title || typeof title !== 'string' || !title.trim() || title.length > 40) {
     res.status(400).send({
@@ -74,8 +74,8 @@ app.put('/videos/:videosId', (req: Request, res: Response) => {
   }
 });
 
-app.get('/videos/:videosId', (req: Request, res: Response) => {
-  const id = +req.params.videoId;
+app.get('/videos/:videoId', (req: Request, res: Response) => {
+  const id = +req.params.videosId;
   const video = videos.find((v) => v.id === id);
 
   if (video) {
@@ -85,7 +85,7 @@ app.get('/videos/:videosId', (req: Request, res: Response) => {
   }
 });
 
-app.delete('/videos/:videosId', (req: Request, res: Response) => {
+app.delete('/videos/:videoId', (req: Request, res: Response) => {
   const id = +req.params.videoId;
   const newVideos = videos.filter((v) => v.id !== id);
 
