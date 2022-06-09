@@ -58,7 +58,6 @@ app.put('/videos/:videoId', (req: Request, res: Response) => {
           field: 'title',
         },
       ],
-      resultCode: 1,
     });
     return;
   }
