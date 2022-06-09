@@ -28,7 +28,7 @@ app.get('/videos', (req: Request, res: Response) => {
 app.post('/videos', (req: Request, res: Response) => {
   let title = req.body.title;
   if (!title || typeof title !== 'string' || !title.trim() || title.length > 40) {
-    res.sendStatus(400).send({
+    res.status(400).send({
       errorsMessages: [
         {
           message: 'Incorrect title',
@@ -41,17 +41,17 @@ app.post('/videos', (req: Request, res: Response) => {
   }
   const newVideo = {
     id: +new Date(),
-    title: title,
+    title: 'title',
     author: 'it-incubator.eu',
   };
   videos.push(newVideo);
-  res.sendStatus(201).send(newVideo);
+  res.status(201).send(newVideo);
 });
 
 app.put('/videos/:videosId', (req: Request, res: Response) => {
   let title = req.body.title;
   if (!title || typeof title !== 'string' || !title.trim() || title.length > 40) {
-    res.sendStatus(400).send({
+    res.status(400).send({
       errorsMessages: [
         {
           message: 'Incorrect title',
@@ -70,7 +70,7 @@ app.put('/videos/:videosId', (req: Request, res: Response) => {
     video.title = title;
     res.status(204).send(video);
   } else {
-    res.send(404);
+    res.sendStatus(404);
   }
 });
 
@@ -79,7 +79,7 @@ app.get('/videos/:videosId', (req: Request, res: Response) => {
   const video = videos.find((v) => v.id === id);
 
   if (video) {
-    res.json(video);
+    res.send(video);
   } else {
     res.send(404);
   }
