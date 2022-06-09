@@ -17,19 +17,12 @@ const videos = [
   { id: 5, title: 'About JS - 05', author: 'it-incubator.eu' },
 ];
 
-app.get('/videos', (req: Request, res: Response) => {
-  res.send(videos);
+app.get('/', (req: Request, res: Response) => {
+  res.send('HELLO IT-INCUBATOR');
 });
 
-app.get('/videos/:videosId', (req: Request, res: Response) => {
-  const id = +req.params.videoId;
-  const video = videos.find((v) => v.id === id);
-
-  if (!video) {
-    res.sendStatus(404);
-  } else {
-    res.json(video);
-  }
+app.get('/videos', (req: Request, res: Response) => {
+  res.send(videos);
 });
 
 app.post('/videos', (req: Request, res: Response) => {
@@ -73,23 +66,34 @@ app.put('/videos/:videosId', (req: Request, res: Response) => {
   const id = +req.params.videoId;
   const video = videos.find((v) => v.id === id);
 
-  if (!video) {
-    res.sendStatus(404);
-  } else {
+  if (video) {
     video.title = title;
+    res.status(204).send(video);
+  } else {
+    res.send(404);
+  }
+});
+
+app.get('/videos/:videosId', (req: Request, res: Response) => {
+  const id = +req.params.videoId;
+  const video = videos.find((v) => v.id === id);
+
+  if (video) {
     res.json(video);
+  } else {
+    res.send(404);
   }
 });
 
 app.delete('/videos/:videosId', (req: Request, res: Response) => {
   const id = +req.params.videoId;
-  const index = videos.findIndex((v) => v.id === id);
+  const index = videos.filter((v) => v.id !== id);
 
-  if (index === -1) {
-    res.sendStatus(404);
+  if (newVideo.length < videos.length) {
+    videos = newVideos;
+    res.send(204);
   } else {
-    videos.splice(index, 1);
-    res.sendStatus(204);
+    res.send(404);
   }
 });
 
