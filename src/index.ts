@@ -9,7 +9,7 @@ app.use(bodyParser.json());
 
 const port = process.env.PORT || 5000;
 
-const videos = [
+let videos = [
   { id: 1, title: 'About JS - 01', author: 'it-incubator.eu' },
   { id: 2, title: 'About JS - 02', author: 'it-incubator.eu' },
   { id: 3, title: 'About JS - 03', author: 'it-incubator.eu' },
@@ -87,9 +87,9 @@ app.get('/videos/:videosId', (req: Request, res: Response) => {
 
 app.delete('/videos/:videosId', (req: Request, res: Response) => {
   const id = +req.params.videoId;
-  const index = videos.filter((v) => v.id !== id);
+  const newVideos = videos.filter((v) => v.id !== id);
 
-  if (newVideo.length < videos.length) {
+  if (newVideos.length < videos.length) {
     videos = newVideos;
     res.send(204);
   } else {
